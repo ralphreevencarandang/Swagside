@@ -1,0 +1,40 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
+
+
+@import 'tailwindcss';
+
+
+@theme{
+  --font-inter: inter;
+  --font-montserrat: Montserrat;
+  --font-oswald: Oswald;
+
+}
+
+*{
+  box-sizing: border-box;
+}
+
+
+@layer components{
+  .max-container{
+    max-width: 1440px;
+    margin: 0 auto;  
+  }
+
+  .padding-x{
+    @apply px-8 sm:px-16
+  }
+  .padding-y{
+    @apply py-8 sm:py-16
+  }
+
+  .flex-center{
+    @apply flex justify-center items-center
+  }
+
+  .flex-col-center{
+    @apply flex flex-col justify-center items-center 
+  }
+}

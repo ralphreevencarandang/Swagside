@@ -2,12 +2,13 @@ import React from 'react'
 import { Search, UserRound, ShoppingCart, Menu, X } from 'lucide-react';
 import { Link } from 'react-router';
 import { useState } from 'react';
+import { Logo } from '../assets/images';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   
   return (
-    <section className='w-full bg-blue-200 py-5 shadow fixed'>
+    <section className='w-full  py-5 shadow bg-[#FFFBF7] fixed '>
       <div className='max-container padding-x'>
 
         <div className='flex items-center justify-between font-oswald'>        

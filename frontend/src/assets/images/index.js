@@ -1,0 +1,13 @@
+import Banner from '../images/Banner.png'
+import Logo from '../images/Logo.png'
+
+import exchange from '../images/exchange_icon.png'
+import quality from '../images/quality_icon.png'
+import support from '../images/support_img.png'
+
+import p_img38 from '../images/p_img38.png'
+
+export {
+    Banner, Logo ,p_img38,
+    exchange, quality, support
+}

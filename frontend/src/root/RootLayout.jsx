@@ -7,8 +7,9 @@ const RootLayout = () => {
 
     
     <div className='w-full'>
+        
         <Navbar/>
-        <div className='min-h-screen max-container padding-x'>
+        <div className='min-h-screen max-container padding-x -z-10'>
             <Outlet/>
         </div>
         <Footer/>

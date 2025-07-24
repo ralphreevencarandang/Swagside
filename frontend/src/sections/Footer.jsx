@@ -8,7 +8,7 @@ const Footer = () => {
           <div className='flex flex-col gap-10 lg:flex-row lg:gap-20'> 
               <div>
                   <h1 className='mb-5 font-oswald text-4xl'>LOGO</h1>
-                  <p className='text-sm font-montserrat'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non ex quibusdam, numquam beatae velit soluta nisi enim sed quis ducimus accusamus fugiat quae voluptatem error saepe minima, dolorum, dignissimos labore.</p>
+                  <p className='text-sm font-montserrat text-justify'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non ex quibusdam, numquam beatae velit soluta nisi enim sed quis ducimus accusamus fugiat quae voluptatem error saepe minima, dolorum, dignissimos labore.</p>
               </div>
 
               <div>
@@ -24,7 +24,7 @@ const Footer = () => {
               <div>
                 <h1 className='mb-5 font-oswald text-4xl'>GET IN TOUCH</h1>
                 <p className='font-montserrat text-sm'>+63 912-3456-789</p>
-                <p className='font-montserrat text-sm'>ralphreevenacarandang@gmail.com</p>
+                <p className='font-montserrat text-sm'>ralphreevencarandang@gmail.com</p>
               </div>
 
           </div>
@@ -32,7 +32,7 @@ const Footer = () => {
         </div>
 
         <div className='border border-slate-200 text-center'>
-           <p className='font-montserrat py-5 text-sm'>Copyright 2025 @ralphreeve.dev - All Right Reserved.</p>
+           <p className='font-montserrat py-5 text-sm'>Copyright 2025 @ralphreeven.dev - All Right Reserved.</p>
         </div>
     </footer>
   )

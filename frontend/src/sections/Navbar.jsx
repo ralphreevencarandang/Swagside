@@ -11,18 +11,21 @@ const Navbar = () => {
     <section className='w-full  py-5 shadow bg-[#FFFBF7] fixed '>
       <div className='max-container padding-x'>
 
-        <div className='flex items-center justify-between font-oswald'>        
-            <h1 className='text-2xl'>Logo</h1> 
+        <div className='flex items-center justify-between font-oswald'>  
+        
+          <Link to={'/'}><h1 className='text-2xl'>Logo</h1>  </Link>      
           <div className='hidden sm:flex gap-3 items-center '>
-              <Link to="">HOME</Link>
-              <Link to="">COLLECTION</Link>
-              <Link to="">ABOUT</Link>
-              <Link to="">CONTACT</Link>
+              <Link to="/">HOME</Link>
+              <Link to="/collection">COLLECTION</Link>
+              <Link to="/about">ABOUT</Link>
+              <Link to="/contact">CONTACT</Link>
           </div>
 
           <div className='flex gap-3 items-center justify-center'>
-              <Search />
-              <UserRound  />
+            <Link to={'/collection'}> < Search /></Link>
+             
+              <Link to={'/sign-up'}> <UserRound /></Link>
+          
               <ShoppingCart />
               <div className='sm:hidden cursor-pointer' onClick={()=> setIsOpen(!isOpen)}>
                 {isOpen ? (<X />) : ( <Menu  />)}
@@ -37,10 +40,10 @@ const Navbar = () => {
 
         {isOpen && 
           <div className='sm:hidden flex flex-col items-center justify-center mt-3 font-oswald'>
-              <Link to="" className=' py-1'>HOME</Link>
-              <Link to="" className=' py-1'>COLLECTION</Link>
-              <Link to="" className=' py-1'>ABOUT</Link>
-              <Link to="" className=' py-1'>CONTACT</Link>
+              <Link to="/" className=' py-1'>HOME</Link>
+              <Link to="/collection" className=' py-1'>COLLECTION</Link>
+              <Link to="/about" className=' py-1'>ABOUT</Link>
+              <Link to="/contact" className=' py-1'>CONTACT</Link>
 
           </div>
         }

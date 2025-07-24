@@ -28,7 +28,7 @@ const Collection = () => {
           </div>
 
           <div>
-              <div className='flex justify-between gap-2 my-5'>
+              <div className='flex justify-between gap-2 my-5 lg:mt-0'>
                 <h1 className='text-lg sm:text-xl font-montserrat'>ALL COLLECTIONS</h1>
                 <select className='border border-gray-200 font-montserrat text-sm sm:px-1.5 sm:py-3'>
                   <option value="relevant">Sort by: relevant</option>

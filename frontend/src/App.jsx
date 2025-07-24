@@ -4,6 +4,7 @@ import HomePage from './root/pages/HomePage'
 import RootLayout from './root/RootLayout'
 import AuthLayout from './_auth/AuthLayout'
 import Signup from './_auth/forms/Signup'
+import Signin from './_auth/forms/Signin'
 import About from './root/pages/About'
 import Collection from './root/pages/Collection'
 import Contact from './root/pages/Contact'
@@ -18,6 +19,7 @@ function App() {
             {/* Public Routes */}
             <Route element={<AuthLayout/>}>
                 <Route path='/sign-up' element={<Signup/>}/>
+                <Route path='/sign-in' element={<Signin/>}/>
             </Route>
 
 

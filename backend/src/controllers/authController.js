@@ -1,4 +1,4 @@
-import express from 'express'
+
 import { User } from '../models/UserModel.js';
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken';
@@ -30,6 +30,65 @@ export const register = async (req, res)=>{
 
     } catch (error) {
         console.log('Error in register function: ', error);
+        res.status(500).json({success: false, message: 'Internal server error'})
+        
+    }
+}
+
+export const login = async (req, res)=>{
+    try {
+        const {email, password} = req.body;
+
+        if(!email || !password){
+            res.status(422).json({success:false, message: 'Please input your credentials'});
+            return
+        }
+
+        const user = await User.findOne({email});
+
+        if(!user){
+            res.status(422).json({success:false, message: 'Account doesn\'t exist'});
+            return
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if(!isMatch){
+            res.status(422).json({success:false, message: 'Incorrect credentials'});
+            return
+        }
+
+        const token = jwt.sign({id:user.id}, process.env.JWT_SECRET, {expiresIn: '1d'});
+
+          res.cookie('token', token, {
+            httpOnly: true,  
+            secure: true,
+            sameSite: 'none',
+            maxAge: 1 * 24 * 60 *60 * 100
+        })
+
+        res.status(201).json({success:true, message:'Successfully login'})
+
+    } catch (error) {
+        console.log('Error in login function: ', error);
+        res.status(500).json({success: false, message: 'Internal server error'})
+    }
+}
+
+export const logout = async (req, res)=>{
+    try {
+
+        res.clearCookie('token',{
+            httpOnly: true,  
+            secure: true,
+            sameSite: 'none',
+            maxAge: 1 * 24 * 60 *60 * 100
+        })
+
+        res.status(201).json({success:true, message:'Logout success!'})
+        
+    } catch (error) {
+        console.log('Error in logout function: ', error);
         res.status(500).json({success: false, message: 'Internal server error'})
         
     }

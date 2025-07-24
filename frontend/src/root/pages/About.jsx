@@ -25,7 +25,7 @@ const About = () => {
         </div>
 
 
-        <div className='py-15'>
+        <div className='pt-15'>
             <h1 className='font-oswald text-2xl mb-10'>WHY CHOOSE US</h1>
             
             <div className='grid grid-cols-1 md:grid-cols-3'>

@@ -8,6 +8,8 @@ import Signin from './_auth/forms/Signin'
 import About from './root/pages/About'
 import Collection from './root/pages/Collection'
 import Contact from './root/pages/Contact'
+import AdminLayout from './admin/AdminLayout'
+import CreateProduct from './admin/Pages/CreateProduct'
 function App() {
 
 
@@ -30,6 +32,12 @@ function App() {
                 <Route path='/about' element={<About/>}/>
                 <Route path='/collection' element={<Collection/>}/>
                 <Route path='/contact' element={<Contact/>}/>
+            </Route>
+
+            {/* Admin Routes */}
+
+            <Route element={<AdminLayout/>}>
+              <Route path='/add-product' element={<CreateProduct/>}/>
             </Route>
 
 

@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 dotenv.config();
-export const userAuth = async(req, res, next)=>{
+export const authenticate = async(req, res, next)=>{
     try {
         const {token} = req.cookies;
         if(!token){
@@ -11,8 +11,13 @@ export const userAuth = async(req, res, next)=>{
 
         const tokenDecoded = jwt.verify(token, process.env.JWT_SECRET)
 
-        if(tokenDecoded.id){
-            req.body.userId = tokenDecoded.id;
+        if(tokenDecoded){
+            // Attach user info to request object
+            req.user = {
+                id: tokenDecoded.id,
+                isAdmin: tokenDecoded.isAdmin,
+                email: tokenDecoded.email
+            };
         }else{
             res.status(401).json({success: false, message: 'Not Authorized'})
         }

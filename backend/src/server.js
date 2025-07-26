@@ -4,6 +4,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import { connectDB } from './config/db.js';
 import authRoute from '../src/Routes/authRoute.js'
+import adminRoute from '../src/Routes/adminRoute.js'
 dotenv.config();
 
 await connectDB();
@@ -14,13 +15,13 @@ app.use(cookieParser())
 
 app.use(cors({
     origin: [''],
-    allowedHeaders: '',
     credentials: true,
 }))
 
 app.use(express.json());
 
-app.use(authRoute)
+app.use('/api',authRoute);
+app.use('/api',adminRoute);
 
 
 

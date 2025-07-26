@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 
 export const register = async (req, res)=>{
     try {
-        const {name, email, password } = req.body;
+        const {name, email, password, isAdmin = false } = req.body;
 
         if(!name || !email || !password){
             res.status(422).json({success:false, message:'Please input required fields'})
@@ -23,7 +23,8 @@ export const register = async (req, res)=>{
         const newUser = new User({
             name,
             email,
-            password:hashedPassword
+            password:hashedPassword,
+            isAdmin
         })
         await newUser.save();
         res.status(201).json({success:true, message:'User successfully created!' })
@@ -51,18 +52,18 @@ export const login = async (req, res)=>{
             return
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, user.password) && user.isAdmin === false;
 
         if(!isMatch){
             res.status(422).json({success:false, message: 'Incorrect credentials'});
             return
         }
 
-        const token = jwt.sign({id:user.id}, process.env.JWT_SECRET, {expiresIn: '1d'});
+        const token = jwt.sign({id:user._id}, process.env.JWT_SECRET, {expiresIn: '1d'});
 
           res.cookie('token', token, {
             httpOnly: true,  
-            secure: true,
+            secure: process.env.NODE_ENV === 'production',
             sameSite: 'none',
             maxAge: 1 * 24 * 60 *60 * 100
         })
@@ -80,7 +81,7 @@ export const logout = async (req, res)=>{
 
         res.clearCookie('token',{
             httpOnly: true,  
-            secure: true,
+            secure: process.env.NODE_ENV === 'production',
             sameSite: 'none',
             maxAge: 1 * 24 * 60 *60 * 100
         })

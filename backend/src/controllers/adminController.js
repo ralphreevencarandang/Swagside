@@ -98,3 +98,94 @@ export const createProduct = async(req, res)=>{
         
     }
 }
+
+export const deleteProduct = async (req, res) => {
+    try {
+        const {id} = req.params;
+
+        if(!id){
+            res.status(400).json({success: false, message:'Product not found'});
+            return
+        }
+        await Product.findByIdAndDelete(id)
+        res.status(201).json({success:true, message: 'Product deleted successfully'})
+    } catch (error) {
+        console.log('Error in delete product function: ', error);
+        res.status(500).json({success:false, message:'Internal server error'})
+    }
+}
+
+export const updateProduct = async (req, res) => {
+    try {
+        const {id, name, image, description, category, subCategory, price, size, isBestSeller, stock} = req.body;
+
+        if(!id){
+            res.status(400).json({success: false, message:'Please provide product id'});
+            return
+        }
+        if(!name || !image || !description || !category || !subCategory || !price || !size || !isBestSeller || !stock){
+            res.status(422).json({success:false, message:'Please input all fields '});
+            return
+        }
+
+        const product = await Product.findById(id)
+
+        if(!product){
+            res.status(400).json({success: false, message:'Product not found'});
+            return
+        }
+
+        const newProduct = {
+            name:name,
+            image,
+            description,
+            category,
+            subCategory,
+            price,
+            size,
+            isBestSeller,
+            stock
+        }
+
+        await Product.findByIdAndUpdate(id, newProduct)
+        res.status(201).json({success:true, message: 'Product updated successfully'})
+        
+    } catch (error) {
+        console.log('Error in update product funtion: ', error);
+        res.status(500).json({success:false, message:'Internal server error'})
+        
+    }
+}
+
+export const getAllProduct = async (req, res) => {
+    try {
+
+        const products = await Product.find();
+
+        res.status(200).json({success:true, products})
+        
+    } catch (error) {
+        console.log('Error in get all product function: ', error);
+        res.status(500).json({success:false, message:'Internal server error'})
+        
+    }
+}
+
+export const getProduct = async (req, res) => {
+    try {
+        const {id} = req.params;
+
+
+        const product = await Product.findById(id);
+
+        if(!product){
+            res.status(404).json({success:false, message:'Product not found'})
+            return
+        }
+        res.status(200).json({success:true, product})
+    } catch (error) {
+        console.log('Error in get product function: ', error);
+        res.status(500).json({success:false, message:'Internal server error'})
+        
+    }
+}

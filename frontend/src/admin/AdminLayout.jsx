@@ -6,7 +6,6 @@ const AdminLayout = () => {
   return (
     <section className='w-full'>
         <AdminNavbar/>
-
         <div className='flex  max-container px-0 md:px-16 '>
             <Sidebar/>
             <Outlet/>

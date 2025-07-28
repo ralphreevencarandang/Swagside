@@ -5,9 +5,9 @@ import jwt from 'jsonwebtoken';
 
 export const register = async (req, res)=>{
     try {
-        const {name, email, password, isAdmin = false } = req.body;
+        const {name, email, password, isAdmin = false, confirmPassword } = req.body;
 
-        if(!name || !email || !password){
+        if(!name || !email || !password ||!confirmPassword){
             res.status(422).json({success:false, message:'Please input required fields'})
             return
         }
@@ -16,6 +16,11 @@ export const register = async (req, res)=>{
 
         if(existingUser){
             res.status(422).json({success:false, message:'Email already exist!'})
+            return
+        }
+
+        if(password!== confirmPassword){
+            res.status(422).json({success:false, message:'Password doesn\'t match!'});
             return
         }
 

@@ -1,5 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
+import TextField from '../../components/forms/TextField'
+import { Formik, Form } from 'formik'
+import { signupSchema } from '../../validation'
 const Signup = () => {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 pt-25 lg:px-8">
@@ -15,38 +18,36 @@ const Signup = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <Formik initialValues={{name:'', email:'', password:'', confirmPassword:''}} validationSchema={signupSchema} 
+          onSubmit={
+            (values, actions)=> {
+              console.log('Values: ', values);
+              console.log('Actions: ', actions);
+              actions.resetForm()
+              
+            }}>
+            {props => (
+              <Form>
+                      {/* NAME FIELD */}
             <div>
               <label htmlFor="name" className="block text-sm/6 font-medium text-gray-900">
                 Name
               </label>
-              <div className="mt-2">
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  autoComplete="name"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
+              <TextField  id="name" name="name" type="text"required autoComplete="name"/>
             </div>
+            {/* END NAME FIELD */}
+
+
+            {/* EMAIL FIELD */}
             <div>
               <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                 Email address
               </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
+              <TextField  id="email"name="email"  type="email"required autoComplete="email"/>
             </div>
+            {/* END EMAIL FIELD */}
 
+            {/* PASSWORD FIELD */}
             <div>
               <div className="flex items-center justify-between">
                 <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
@@ -54,35 +55,22 @@ const Signup = () => {
                 </label>
                 
               </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  autoComplete="current-password"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
+              <TextField   id="password" name="password"type="password" required autoComplete="current-password" />
             </div>
-            <div>
+            {/* END PASSWORD FIELD */}
+
+
+            {/* CONFIRM PASSWORD FIELD */}
+            <div className='mb-4'>
               <div className="flex items-center justify-between">
                 <label htmlFor="confirmPassword" className="block text-sm/6 font-medium text-gray-900">
                   Confirm Password
                 </label>
                 
               </div>
-              <div className="mt-2">
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  required
-                  autoComplete="current-password"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
+              <TextField id="confirmPassword" name="confirmPassword" type="password" required autoComplete="current-password"/>
             </div>
+            {/* END CONFIRM PASSWORD FIELD */}
 
             <div>
               <button
@@ -92,7 +80,11 @@ const Signup = () => {
                 Register
               </button>
             </div>
-          </form>
+
+              </Form>
+            )}
+          </Formik>
+
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             Already have an account?{' '}

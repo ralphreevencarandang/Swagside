@@ -67,9 +67,10 @@ const Signin = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer"
+                className={`${loginMutation.isPending ? 'opacity-15' : ''}flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer`}
+                disabled={loginMutation.isPending}
               >
-                Sign in
+                {loginMutation.isPending ? 'Signing in...' : 'Sign in'}
               </button>
             </div>
 

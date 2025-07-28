@@ -1,6 +1,6 @@
 import React from "react";
 import { uploadArea } from "../../assets/images";
-import Button from "../../components/Button";
+import { Formik, Form } from "formik";
 const CreateProduct = () => {
   return (
     <section className="w-full pt-20 font-montserrat px-3">

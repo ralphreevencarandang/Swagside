@@ -3,7 +3,10 @@ import { Link } from 'react-router'
 import TextField from '../../components/forms/TextField'
 import { Formik, Form } from 'formik'
 import { signupSchema } from '../../validation'
+import { useMutation } from '@tanstack/react-query'
+import { signupQuery } from '../../react-queries'
 const Signup = () => {
+  const signupMutation = useMutation(signupQuery)
   return (
     <div className="flex min-h-full flex-col justify-center px-6 pt-25 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -21,10 +24,7 @@ const Signup = () => {
           <Formik initialValues={{name:'', email:'', password:'', confirmPassword:''}} validationSchema={signupSchema} 
           onSubmit={
             (values, actions)=> {
-              console.log('Values: ', values);
-              console.log('Actions: ', actions);
-              actions.resetForm()
-              
+              signupMutation.mutate(values)
             }}>
             {props => (
               <Form>
@@ -75,9 +75,11 @@ const Signup = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer"
+                className={`${signupMutation.isPending ? 'opacity-50' : ''} flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer`}
+                disabled={signupMutation.isPending}
               >
-                Register
+                {signupMutation.isPending ? 'Registering...' : 'Register'}
+                
               </button>
             </div>
 

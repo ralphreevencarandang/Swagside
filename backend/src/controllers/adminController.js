@@ -34,7 +34,7 @@ export const adminLogin = async(req, res)=>{
 
         res.cookie('token', token, {
              httpOnly: true,  
-            secure: process.env.NODE_ENV === 'production',
+            secure: true,
             sameSite: 'none',
             maxAge: 1 * 24 * 60 *60 * 100
         })
@@ -54,7 +54,7 @@ export const adminLogout = async(req, res)=>{
 
         res.clearCookie('token', {
             httpOnly: true,  
-            secure: process.env.NODE_ENV === 'production',
+            secure: true,
             sameSite: 'none',
             maxAge: 1 * 24 * 60 *60 * 100
         })
@@ -69,22 +69,24 @@ export const adminLogout = async(req, res)=>{
 export const createProduct = async(req, res)=>{
     try {
 
-        const {name, image, description, category, subCategory, price, size, isBestSeller, stock} = req.body;
+        const {name, description, category, subCategory, price, size, stock} = req.body;
         
-        if(!name || !image || !description || !category || !subCategory || !price || !size || !isBestSeller || !stock){
+        if(!name  || !description || !category || !subCategory || !price || !size  || !stock){
             res.status(422).json({success:false, message:'Please input all fields '});
             return
         }
 
+        const imagePaths = req.file.path;
+
+
         const newProduct = new Product( {
             name,
-            image,
+            image: imagePaths, 
             description,
             category,
             subCategory,
             price,
             size,
-            isBestSeller,
             stock
         })
 

@@ -10,6 +10,8 @@ import Collection from './root/pages/Collection'
 import Contact from './root/pages/Contact'
 import AdminLayout from './admin/AdminLayout'
 import CreateProduct from './admin/Pages/CreateProduct'
+import ProductList from './admin/Pages/ProductList'
+import Orders from './admin/Pages/Orders'
 function App() {
 
 
@@ -38,6 +40,8 @@ function App() {
 
             <Route element={<AdminLayout/>}>
               <Route path='/add-product' element={<CreateProduct/>}/>
+              <Route path='/products' element={<ProductList/>}/>
+              <Route path='/orders' element={<Orders/>}/>
             </Route>
 
 

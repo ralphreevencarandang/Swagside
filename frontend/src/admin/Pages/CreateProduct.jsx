@@ -3,7 +3,7 @@ import { uploadArea } from "../../assets/images";
 import { Formik, Form,Field } from "formik";
 import { createProductSchema } from "../../validation";
 import { useState } from "react";
-import { createProductQuery } from "../../react-queries";
+import { createProductQuery } from "../../react-queries/adminQueries";
 import { useMutation } from "@tanstack/react-query";
 
 const CreateProduct = () => {
@@ -35,8 +35,9 @@ const CreateProduct = () => {
       validationSchema={createProductSchema}
 
       onSubmit={(values, actions)=>{
-        console.log("Form submitted!");
+        
         createProductMutation.mutate(values)
+        actions.resetForm();
       }}
 
       

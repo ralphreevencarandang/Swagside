@@ -1,8 +1,9 @@
-import { queryOptions } from "@tanstack/react-query";
+
 import { toast } from "react-toastify";
 import axios from '../lib/axios'
-import { mutationOptions } from "@tanstack/react-query";
-import { useNavigate } from "react-router";
+import { mutationOptions, queryOptions } from "@tanstack/react-query";
+
+
 
 const signIn = async (values) => {
     try {
@@ -27,15 +28,10 @@ const signUp = async (values) => {
 }
 
 const logout = async ()=>{
-
-
     try {
         const res = await axios.post('/admin/logout')
         res.data.success && toast.success(res.data.message)
         console.log('Logout submiited');
-        
- 
-
     } catch (error) {
         console.log('Error in logout function', error);
         toast.error(error.response.data.message)
@@ -79,6 +75,34 @@ const createProduct = async(values)=>{
     }
 }   
 
+const getAllProducts = async ()=>{
+    try {
+        const res = await axios.get('/admin/products')
+        console.log(res.data);
+        return res.data
+    } catch (error) {
+        console.log('Error in get all product function: ', error);
+        toast.error(error.response.data.message)
+        throw error; 
+    }
+}
+
+const deleteProduct = async (id)=>{
+    
+    try {
+        const res = await axios.delete(`/admin/deleteProduct/${id}`)
+        res.data.success && toast.success(res.data.message);
+        console.log('Deleted');
+        
+        
+    } catch (error) {
+        console.log('Error in get delete product function: ', error);
+        toast.error(error.response.data.message)
+        throw error; 
+    }
+}
+
+// MUTATIONS
 export const signinQuery = mutationOptions({
         mutationFn: signIn,
         onError: (error)=>{
@@ -112,7 +136,18 @@ export const logoutQuery = mutationOptions({
 })
 
 
+export const getAllProductOptions = queryOptions({
+    queryKey: ['products'],
+    queryFn: getAllProducts,
+})
 
+export const deleteProductOptions = mutationOptions({
+    mutationFn: deleteProduct,
+    onError: (error)=>{
+        console.log('Error in Create Product mutation: ', error);
+    },
+  
+})
 
 
 

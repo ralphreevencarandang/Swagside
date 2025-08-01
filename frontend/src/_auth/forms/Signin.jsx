@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import TextField from '../../components/forms/TextField'
 import { Formik,Form } from 'formik';
 import { signinSchema } from '../../validation';
-import { signinQuery } from '../../react-queries';
+import { signinQuery } from '../../react-queries/adminQueries';
 import { useMutation } from '@tanstack/react-query';
 import axios from '../../lib/axios'
 import { toast } from "react-toastify";

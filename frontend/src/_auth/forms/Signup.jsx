@@ -4,7 +4,7 @@ import TextField from '../../components/forms/TextField'
 import { Formik, Form } from 'formik'
 import { signupSchema } from '../../validation'
 import { useMutation } from '@tanstack/react-query'
-import { signupQuery } from '../../react-queries'
+import { signupQuery } from '../../react-queries/adminQueries'
 const Signup = () => {
   const signupMutation = useMutation(signupQuery)
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+
 import { uploadArea } from "../../assets/images";
 import { Formik, Form,Field } from "formik";
 import { createProductSchema } from "../../validation";
@@ -11,7 +11,7 @@ const CreateProduct = () => {
 
   const createProductMutation = useMutation(createProductQuery)
   
-    const handleImageChange = (event, setFieldValue) => {
+  const handleImageChange = (event, setFieldValue) => {
     const file = event.currentTarget.files[0];
     if (file) {
       setImagePreview(URL.createObjectURL(file));

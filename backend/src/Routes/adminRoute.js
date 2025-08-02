@@ -9,7 +9,7 @@ router.post('/admin/login', adminLogin);
 router.post('/admin/logout', adminLogout);
 router.post('/admin/addProduct',upload.single('image') ,authenticate,requireAdmin ,createProduct);
 router.delete('/admin/deleteProduct/:id',authenticate,requireAdmin ,deleteProduct);
-router.put('/admin/updateProduct',authenticate,requireAdmin ,updateProduct);
+router.put('/admin/updateProduct/:id' ,upload.single('image'),authenticate,requireAdmin ,updateProduct);
 router.get('/admin/products',authenticate,requireAdmin ,getAllProduct);
 router.get('/admin/product/:id',authenticate,requireAdmin ,getProduct);
 

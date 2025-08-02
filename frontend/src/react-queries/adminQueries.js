@@ -3,8 +3,6 @@ import { toast } from "react-toastify";
 import axios from '../lib/axios'
 import { mutationOptions, queryOptions } from "@tanstack/react-query";
 
-
-
 const signIn = async (values) => {
     try {
         const res = await axios.post('/admin/login', values)
@@ -66,6 +64,8 @@ const createProduct = async(values)=>{
         });
         
         res.data.success && toast.success(res.data.message);
+        console.log(res.data);
+        
         return res.data; // Return data for React Query
     } catch (error) {
         console.log('Error in create product function: ', error);   
@@ -97,6 +97,54 @@ const deleteProduct = async (id)=>{
         
     } catch (error) {
         console.log('Error in get delete product function: ', error);
+        toast.error(error.response.data.message)
+        throw error; 
+    }
+}
+
+const getProduct = async (id)=>{
+    try {
+        const res = await axios.get(`/admin/product/${id}`);
+        console.log(res.data);
+        return res.data
+    
+    } catch (error) {
+        console.log('Error in get delete product function: ', error);
+        toast.error(error.response.data.message)
+        throw error; 
+    }
+}
+
+const updateProduct = async ({id, values})=>{
+    try {
+      const formData = new FormData();
+
+        formData.append("name", values.name);
+        formData.append("description", values.description);
+        formData.append("category", values.category);
+        formData.append("subCategory", values.subCategory);
+        formData.append("price", values.price);
+        formData.append("stock", values.stock);
+        formData.append("size", JSON.stringify(values.size));
+        formData.append("isBestSeller", values.isBestSeller);
+
+        // Only append image if it's a File (not string path)
+        if (values.image instanceof File) {
+            formData.append("image", values.image);
+        }
+
+        const res = await axios.put(`/admin/updateProduct/${id}`, formData, {
+            headers: {
+            "Content-Type": "multipart/form-data",
+            },
+        });
+
+        if (res.data.success) toast.success(res.data.message);
+        return res.data;
+
+        
+    } catch (error) {
+        console.log('Error in get update product function: ', error);
         toast.error(error.response.data.message)
         throw error; 
     }
@@ -149,6 +197,18 @@ export const deleteProductOptions = mutationOptions({
   
 })
 
+export const getProductOptions = (id)=>({
+    queryKey: ['product', id],
+    queryFn: () => getProduct(id),
+
+})
+
+export const updateProductOptions = mutationOptions({
+    mutationFn: updateProduct,
+     onError: (error)=>{
+        console.log('Error in Update Product mutation: ', error);
+    },
+})
 
 
 

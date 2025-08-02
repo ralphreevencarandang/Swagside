@@ -69,13 +69,14 @@ export const adminLogout = async(req, res)=>{
 export const createProduct = async(req, res)=>{
     try {
 
-        const {name, description, category, subCategory, price, size, stock} = req.body;
+        const {name, description, category, subCategory, price, size, stock, isBestSeller} = req.body;
         
         if(!name  || !description || !category || !subCategory || !price || !size  || !stock){
             res.status(422).json({success:false, message:'Please input all fields '});
             return
         }
 
+        const parseSize = JSON.parse(size)
         const imagePaths = req.file.path;
 
 
@@ -86,8 +87,9 @@ export const createProduct = async(req, res)=>{
             category,
             subCategory,
             price,
-            size,
-            stock
+            size: parseSize,
+            stock,
+            isBestSeller
         })
 
         await newProduct.save();
@@ -119,16 +121,19 @@ export const deleteProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
     try {
-        const {id, name, image, description, category, subCategory, price, size, isBestSeller, stock} = req.body;
+        const {id} = req.params
+        const { name, image, description, category, subCategory, price, size, isBestSeller, stock} = req.body;
 
         if(!id){
             res.status(400).json({success: false, message:'Please provide product id'});
             return
         }
-        if(!name || !image || !description || !category || !subCategory || !price || !size || !isBestSeller || !stock){
+        if(!name  || !description || !category || !subCategory || !price || !size  || !stock){
             res.status(422).json({success:false, message:'Please input all fields '});
             return
         }
+
+        const parseSize = JSON.parse(size)
 
         const product = await Product.findById(id)
 
@@ -136,15 +141,16 @@ export const updateProduct = async (req, res) => {
             res.status(400).json({success: false, message:'Product not found'});
             return
         }
+        const imagePaths = req.file ? req.file.path : product.image;
 
         const newProduct = {
             name:name,
-            image,
+            image: imagePaths,
             description,
             category,
             subCategory,
             price,
-            size,
+            size: parseSize,
             isBestSeller,
             stock
         }

@@ -38,6 +38,7 @@ const CreateProduct = () => {
         
         createProductMutation.mutate(values)
         actions.resetForm();
+        setImagePreview(null)
       }}
 
       

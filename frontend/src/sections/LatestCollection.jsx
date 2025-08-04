@@ -16,8 +16,8 @@ const LatestCollection = ({result}) => {
       {result.error && <p>{error}</p>}
       {result.data && 
       <div className='grid gird-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 place-content-center'>
-        {result.data.products?.sort((a , b) => new Date(b.createdAt) - new Date(a.createdAt)).map( (item, index)=>
-        <ProductCard products={item} key={index}/>
+        {result.data.products?.sort((a , b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0,10).map( (item, index)=>
+          <ProductCard products={item} key={index}/>
          )}
       </div>
       }

@@ -4,14 +4,18 @@ import LatestCollection from '../../sections/LatestCollection'
 import BestSellers from '../../sections/BestSellers'
 import Policy from '../../sections/Policy'
 import Subscription from '../../sections/Subscription'
-import Footer from '../../sections/Footer'
+import { useQuery } from '@tanstack/react-query'
+import { getAllProductsOptions } from '../../react-queries/userQueries'
+
 const HomePage = () => {
+
+  const data = useQuery(getAllProductsOptions)
   return (
 
     <section className=" ">
       <Hero/>
-      <LatestCollection/>
-      <BestSellers/>
+      <LatestCollection result={data}/>
+      <BestSellers result={data}/>
       <Policy/>
       <Subscription/>
      

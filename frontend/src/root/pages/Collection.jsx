@@ -1,8 +1,15 @@
 import React from 'react'
 import ProductCard from '../../components/ProductCard'
+import { useQuery } from '@tanstack/react-query'
+import { getAllProductsOptions } from '../../react-queries/userQueries'
 const Collection = () => {
+
+  const {data, isPending, error} = useQuery(getAllProductsOptions)
   return (
     <section className='py-25 flex flex-col lg:gap-10  lg:flex-row'>
+      {isPending && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+
 
       {/* Filter div */}
    
@@ -38,15 +45,9 @@ const Collection = () => {
               </div>
 
               <div className='grid grid-cols-2 gap-3 place-content-center md:grid-cols-3 lg:grid-cols-4'>
-                  <ProductCard/>
-                  <ProductCard/>
-                  <ProductCard/>
-                  <ProductCard/>
-                  <ProductCard/>
-                  <ProductCard/>
-                  <ProductCard/>
-                  <ProductCard/>
-                  <ProductCard/>
+                {data && data.products.map((item, index)=>  <ProductCard products={item} key={index}/>)}
+                 
+                 
               </div>
           </div>
    

@@ -1,6 +1,10 @@
 import React from 'react'
 import ProductCard from '../components/ProductCard'
-const LatestCollection = () => {
+import { useQuery } from '@tanstack/react-query'
+import { getAllProductsOptions } from '../react-queries/userQueries'
+const LatestCollection = ({result}) => {
+
+
   return (
     <section className='mb-10'> 
       <div className='text-center mb-10'>
@@ -8,18 +12,15 @@ const LatestCollection = () => {
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, aut?</p>
       </div>
 
+      {result.isPending && <p>Loading....</p>}
+      {result.error && <p>{error}</p>}
+      {result.data && 
       <div className='grid gird-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 place-content-center'>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
+        {result.data.products?.sort((a , b) => new Date(b.createdAt) - new Date(a.createdAt)).map( (item, index)=>
+        <ProductCard products={item} key={index}/>
+         )}
       </div>
+      }
 
     </section>
   )

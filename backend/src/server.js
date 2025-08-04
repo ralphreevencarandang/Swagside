@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import { connectDB } from './config/db.js';
 import authRoute from '../src/Routes/authRoute.js'
 import adminRoute from '../src/Routes/adminRoute.js'
+import userRoute from '../src/Routes/userRoute.js'
 dotenv.config();
 
 await connectDB();
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 app.use('/api',authRoute);
 app.use('/api',adminRoute);
+app.use('/api', userRoute)
 
 
 

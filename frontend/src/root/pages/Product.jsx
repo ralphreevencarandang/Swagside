@@ -1,30 +1,36 @@
 import React from 'react'
 import Button from '../../components/Button'
 import { useParams } from 'react-router'
-import { useQuery } from '@tanstack/react-query'
+import { useQueries, useQuery } from '@tanstack/react-query'
 import { getProductOptions } from '../../react-queries/userQueries'
 import { star_icon, star_dull_icon } from '../../assets/images'
 import ProductCard from '../../components/ProductCard'
+import { getAllProductsOptions } from '../../react-queries/userQueries'
 const Product = () => {
   const {id} = useParams();
 
-  const {data, isPending, error} = useQuery(getProductOptions(id))
+  const [result1, result2] = useQueries({queries:[getProductOptions(id), getAllProductsOptions]})
+ 
 
+  if(result2){
+    console.log('Result 2: ', result2);
+    
+  }
 
 
   return (
     <section className='pt-25'>
 
-      {isPending && <p>Loading....</p>}
-      {error && <p>{error}</p>}
-      {data && 
+      {result1.isPending && <p>Loading....</p>}
+      {result1.error && <p>{error}</p>}
+      {result1.data && 
         <div className='flex flex-col sm:flex-row items-center gap-5 '>
               <div className='mb-4'>
-                <img src={`${import.meta.env.VITE_BACKEND_URL}/${data.product.image}`} alt="Product Image" className='object-contain w-150 ' />
+                <img src={`${import.meta.env.VITE_BACKEND_URL}/${result1.data.product.image}`} alt="Product Image" className='object-contain w-150 ' />
               </div>
 
               <div className='mb-4'>
-                  <p className='font-oswald text-2xl mb-1'>{data.product.name}</p>
+                  <p className='font-oswald text-2xl mb-1'>{result1.data.product.name}</p>
 
                   <div className='flex items-center mb-4'>
                     <img src={star_icon} alt="Star Icon" className='w-3 h-3' />
@@ -35,8 +41,8 @@ const Product = () => {
                     <p>(69)</p>
                   </div>
 
-                  <p className='font-oswald text-3xl mb-4'>₱{data.product.price}</p>
-                  <p className='text-slate-600 mb-4'>{data.product.description}</p>
+                  <p className='font-oswald text-3xl mb-4'>₱{result1.data.product.price}</p>
+                  <p className='text-slate-600 mb-4'>{result1.data.product.description}</p>
                   <p className='font-inter mb-2'>Select Size</p>
 
                   <div className='flex gap-2 items-center font-oswald mb-4'>
@@ -77,16 +83,20 @@ const Product = () => {
 
       </div>
 
-      {data &&
+
+      
+      {result2.isPending && <p>Loading....</p>}
+      {result2.error && <p>{error}</p>}
+
+      {result2.data.products &&
       
       
       <div className='mb-10'>
               <h1 className='font-oswald text-3xl mb-4 text-center py-5'><span className=''>Related</span> Products</h1>
               <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4'>
-                    <ProductCard products={data.product}/>
-                    <ProductCard products={data.product}/>
-                    <ProductCard products={data.product}/>
-                    <ProductCard products={data.product}/>
+                  {result2.data.products.slice(0,4).map((item, index)=> 
+                    <ProductCard products={item} key={index}/>
+                  )}
               </div>
       </div>
       }

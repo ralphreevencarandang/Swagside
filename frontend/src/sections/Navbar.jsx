@@ -13,7 +13,7 @@ const Navbar = () => {
 
         <div className='flex items-center justify-between font-oswald'>  
         
-          <Link to={'/'}><h1 className='text-2xl'>Logo</h1>  </Link>      
+          <Link to={'/'}><h1 className='text-2xl'>SwagSide</h1>  </Link>      
           <div className='hidden sm:flex gap-3 items-center '>
               <Link to="/">HOME</Link>
               <Link to="/collection">COLLECTION</Link>
@@ -24,7 +24,7 @@ const Navbar = () => {
           <div className='flex gap-3 items-center justify-center'>
             <Link to={'/collection'}> < Search /></Link>
              
-              <Link to={'/sign-up'}> <UserRound /></Link>
+              <Link to={'/sign-in'}> <UserRound /></Link>
           
               <ShoppingCart />
               <div className='sm:hidden cursor-pointer' onClick={()=> setIsOpen(!isOpen)}>

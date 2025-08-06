@@ -14,3 +14,28 @@ export const getAllProducts = async(req, res)=>{
         
     }
 }
+
+export const getProduct = async(req,res)=>{
+    try {
+        const {id} = req.params;
+
+        if(!id){
+            res.status(404).json({success:false, message:"Product ID not found"});
+            return
+        }
+
+        const product = await Product.findById(id)
+
+        if(!product){
+            res.status(404).json({success:false, message:"Product not found"});
+            return
+        }
+
+        res.status(200).json({success: true, product})
+
+    } catch (error) {
+        console.log('Error in get products controller: ',error);
+        res.status(500).json({success: false, message: "Internal server error"})
+    }
+}
+

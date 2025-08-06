@@ -9,10 +9,12 @@ import p_img38 from '../images/p_img38.png'
 import aboutImg from '../images/aboutImg.png'
 import contactImg from '../images/contactImg.png'
 import uploadArea from '../images/upload_area.png'
+import star_icon from '../images/star_icon.png'
+import star_dull_icon from '../images/star_dull_icon.png'
 
 export {
     Banner, Logo ,p_img38,
     exchange, quality, support,
     aboutImg,contactImg,
-    uploadArea
+    uploadArea, star_icon, star_dull_icon
 }

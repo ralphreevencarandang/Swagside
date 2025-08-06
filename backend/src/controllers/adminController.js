@@ -197,3 +197,17 @@ export const getProduct = async (req, res) => {
         
     }
 }
+
+
+export const checkAuth = (req, res)=>{
+    try {
+         res.status(200).json({
+        success: true,
+        isAdmin: true,
+        email: req.user.email,
+     });
+    } catch (error) {
+         console.log('Error check auth function: ', error);
+        res.status(500).json({success:false, message:'Internal server error'})
+    }
+}

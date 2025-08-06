@@ -3,14 +3,18 @@ import { Link } from 'react-router'
 import TextField from '../../components/forms/TextField'
 import { Formik,Form } from 'formik';
 import { signinSchema } from '../../validation';
-import { signinQuery } from '../../react-queries/adminQueries';
+import { loginOptions } from '../../react-queries/userQueries';
 import { useMutation } from '@tanstack/react-query';
-import axios from '../../lib/axios'
-import { toast } from "react-toastify";
-
+import { useNavigate } from 'react-router';
 const Signin = () => {
 
-  const loginMutation = useMutation(signinQuery)
+  const navigate = useNavigate();
+  const loginMutation = useMutation({
+    ...loginOptions,
+    onSuccess: ()=>{
+      navigate('/');
+    }
+  })
 
   return (
  <div className="flex min-h-full flex-col justify-center px-6 pt-25 lg:px-8">

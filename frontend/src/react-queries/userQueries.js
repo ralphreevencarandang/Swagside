@@ -16,7 +16,7 @@ const login = async (values)=>{
 const getAllProducts = async ()=>{
     try {
         const res = await axios.get('/user/products');
-        console.log(res.data);
+        // console.log(res.data);
         return res.data
         
     } catch (error) {
@@ -30,7 +30,7 @@ const getProduct = async (id)=>{
     try {
 
         const res = await axios.get(`/user/product/${id}`)
-        console.log(res.data);
+        // console.log(res.data);
         return res.data
         
         

@@ -15,6 +15,7 @@ import Orders from './admin/Pages/Orders'
 import EditProduct from './admin/Pages/EditProduct'
 import AdminLogin from './admin/Pages/AdminLogin'
 import Product from './root/pages/Product'
+import Cart from './root/pages/Cart'
 function App() {
 
 
@@ -38,6 +39,7 @@ function App() {
                 <Route path='/collection' element={<Collection/>}/>
                 <Route path='/contact' element={<Contact/>}/>
                 <Route path='/product/:id' element={<Product/>}/>
+                <Route path='/Cart' element={<Cart/>}/>
             </Route>
 
             {/* Admin Routes */}

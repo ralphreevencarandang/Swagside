@@ -6,21 +6,23 @@ import { getProductOptions } from '../../react-queries/userQueries'
 import { star_icon, star_dull_icon } from '../../assets/images'
 import ProductCard from '../../components/ProductCard'
 import { getAllProductsOptions } from '../../react-queries/userQueries'
+import { useCartStore } from '../../store/cart-store'
+import { useState } from 'react'
+import { toast } from 'react-toastify'
 const Product = () => {
+  
   const {id} = useParams();
-
   const [result1, result2] = useQueries({queries:[getProductOptions(id), getAllProductsOptions]})
  
+  const [size, setSize] = useState('')
+  const [quantity, setQuantity] = useState(1)
+  const { cart, addToCart} = useCartStore();
 
-  if(result2){
-    console.log('Result 2: ', result2);
-    
-  }
-
+  console.log('Cart: ', cart);
+  
 
   return (
     <section className='pt-25'>
-
       {result1.isPending && <p>Loading....</p>}
       {result1.error && <p>{error}</p>}
       {result1.data && 
@@ -46,13 +48,15 @@ const Product = () => {
                   <p className='font-inter mb-2'>Select Size</p>
 
                   <div className='flex gap-2 items-center font-oswald mb-4'>
-                      <button className='bg-gray-200 border border-slate-400 px-4 py-2'>S</button>
-                      <button className='bg-gray-200 border border-slate-400 px-4 py-2'>M</button>
-                      <button className='bg-gray-200 border border-slate-400 px-4 py-2'>L</button>
-                      <button className='bg-gray-200 border border-slate-400 px-4 py-2'>XL</button>
+                      <button className={` border border-slate-400 ${size === 'S' ? 'bg-gray-400' : 'bg-gray-200'} px-4 py-2`} onClick={()=>setSize('S')}>S</button>
+                      <button className={` border border-slate-400 ${size === 'M' ? 'bg-gray-400' : 'bg-gray-200'} px-4 py-2`} onClick={()=>setSize('M')}>M</button>
+                      <button className={` border border-slate-400 ${size === 'L' ? 'bg-gray-400' : 'bg-gray-200'} px-4 py-2`} onClick={()=>setSize('L')}>L</button>
+                      <button className={` border border-slate-400 ${size === 'XL' ? 'bg-gray-400' : 'bg-gray-200'} px-4 py-2`} onClick={()=>setSize('XL')}>XL</button>
                   </div>
 
-                  <Button label={'ADD TO CART'} />
+                  <Button label={'ADD TO CART'} onClick={()=> size ?  addToCart({...result1.data.product, size: size, quantity: quantity}) : toast.error('Please select size') } />
+                   
+                   
                   <hr className='mt-10 border-gray-300 mb-4' />
 
                   <div className='text-sm text-slate-500'>
@@ -88,7 +92,7 @@ const Product = () => {
       {result2.isPending && <p>Loading....</p>}
       {result2.error && <p>{error}</p>}
 
-      {result2.data.products &&
+      {result2.data &&
       
       
       <div className='mb-10'>

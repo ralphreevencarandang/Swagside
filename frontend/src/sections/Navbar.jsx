@@ -25,8 +25,9 @@ const Navbar = () => {
             <Link to={'/collection'}> < Search /></Link>
              
               <Link to={'/sign-in'}> <UserRound /></Link>
+              <Link to={'/cart'}> <ShoppingCart /></Link>
           
-              <ShoppingCart />
+            
               <div className='sm:hidden cursor-pointer' onClick={()=> setIsOpen(!isOpen)}>
                 {isOpen ? (<X />) : ( <Menu  />)}
                 

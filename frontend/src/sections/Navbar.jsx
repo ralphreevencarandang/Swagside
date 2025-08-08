@@ -3,9 +3,10 @@ import { Search, UserRound, ShoppingCart, Menu, X } from 'lucide-react';
 import { Link } from 'react-router';
 import { useState } from 'react';
 import { Logo } from '../assets/images';
+import { useCartStore } from '../store/cart-store';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
-
+  const {cart} = useCartStore();
   
   return (
     <section className='w-full  py-5 shadow bg-[#FFFBF7] fixed '>
@@ -25,7 +26,15 @@ const Navbar = () => {
             <Link to={'/collection'}> < Search /></Link>
              
               <Link to={'/sign-in'}> <UserRound /></Link>
-              <Link to={'/cart'}> <ShoppingCart /></Link>
+              <div className='relative '>
+                  <Link to={'/cart'}>  <ShoppingCart className='z-20'/></Link>
+             
+              <div className='absolute border rounded-full bg-black top-2 left-4'>
+                {cart.length > 0 &&  <p className='text-[9px] px-1.5 text-white'>{cart.length}</p>}
+
+              </div>
+              
+              </div>
           
             
               <div className='sm:hidden cursor-pointer' onClick={()=> setIsOpen(!isOpen)}>

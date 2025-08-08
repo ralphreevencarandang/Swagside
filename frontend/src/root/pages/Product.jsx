@@ -19,7 +19,6 @@ const Product = () => {
   const { cart, addToCart} = useCartStore();
 
   console.log('Cart: ', cart);
-  
 
   return (
     <section className='pt-25'>

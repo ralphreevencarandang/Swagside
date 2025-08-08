@@ -6,7 +6,9 @@ const Cart = () => {
         console.log('Cart Table:  ',cart);
   return (
     <section className='pt-25'>
-        <h1>YOUR CART</h1>
+     
+        <h1 className='font-oswald text-2xl mb-4'>Your Cart</h1>
+
         {cart.length > 0 ?   
         ( 
             cart.map((product, index)=>
@@ -15,7 +17,7 @@ const Cart = () => {
                 </div>
             )
         ) : 
-        <p>Empty Cart</p>}
+         <h1 className='font-oswald text-2xl mb-4'>Your cart is empty ☺ </h1>}
       
         
  

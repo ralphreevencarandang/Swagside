@@ -16,6 +16,7 @@ import EditProduct from './admin/Pages/EditProduct'
 import AdminLogin from './admin/Pages/AdminLogin'
 import Product from './root/pages/Product'
 import Cart from './root/pages/Cart'
+import PlaceOrder from './root/pages/PlaceOrder'
 function App() {
 
 
@@ -40,6 +41,7 @@ function App() {
                 <Route path='/contact' element={<Contact/>}/>
                 <Route path='/product/:id' element={<Product/>}/>
                 <Route path='/Cart' element={<Cart/>}/>
+                <Route path='/place-order' element={<PlaceOrder/>}/>
             </Route>
 
             {/* Admin Routes */}

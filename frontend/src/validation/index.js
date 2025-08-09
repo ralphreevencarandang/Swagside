@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
-const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
-
+const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+const phonenumberRules = /^(09|\+639)\d{9}$/;
 export const signinSchema = yup.object().shape({
     email: yup.string().email('Invalid email').required('Email field is required'),
     password: yup.string().required('Password field is required')
@@ -24,4 +24,16 @@ export const createProductSchema = yup.object().shape({
     stock: yup.number().min(1, 'Stock must be greater than zero').required('Stock field is required'),
     size: yup.array().min(1, 'Please select sizes').required('Size field is required'),
     image:yup.string().required('Please upload image')
+})
+
+export const checkoutSchema = yup.object().shape({
+    firstname: yup.string().min(2, 'First must be at least 2 characters').required('Name field is required'),
+    lastname: yup.string().min(2, 'First must be at least 2 characters').required('Lastname field is required'),
+    email: yup.string().email('Invalid email').required('Email field si required'),
+    street: yup.string().required('Street field is required'),
+    city: yup.string().required('City field is required'),
+    state: yup.string().required('State field is required'),
+    zipcode: yup.number().required('Zipcode field is required'),
+    country: yup.string().required('Country field is required'),
+    phonenumber: yup.string().matches(phonenumberRules, {message: 'Please input valid phonenumber'}).required('Phonenumber field is required'),
 })

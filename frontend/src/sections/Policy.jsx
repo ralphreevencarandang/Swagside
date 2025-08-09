@@ -13,6 +13,6 @@ const Policy = () => {
         )}
     </section>
   )
-}
+} 
 
 export default Policy

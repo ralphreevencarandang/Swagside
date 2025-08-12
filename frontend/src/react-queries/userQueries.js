@@ -55,6 +55,19 @@ const createOrder = async (values)=>{
     }
 }
 
+const getOrders = async ()=>{
+    try {
+        const res = await axios.get(`/user/orders`)
+        console.log(res.data);
+        return res.data
+        
+    } catch (error) {
+         console.log('Error in Create order function: ', error);
+        toast.error(error.response.data.message)
+        throw error; 
+    }
+}
+
 export const getAllProductsOptions = queryOptions({
     queryKey: ['products'],
     queryFn: getAllProducts
@@ -79,5 +92,11 @@ export const createOrderOptions = mutationOptions({
         console.log('Error in login mutations: ',error);
         
     }
+})
+
+export const getOrderOptions = queryOptions({
+    queryKey:['orders'],
+    queryFn: getOrders
+
 })
 

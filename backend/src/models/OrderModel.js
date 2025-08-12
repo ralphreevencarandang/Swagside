@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema({
+    userId: {type:String, required: true},
     firstname: {type:String, required: true},
     lastname: {type:String, required: true},
     email: {type:String, required: true},
@@ -25,6 +26,9 @@ const orderSchema = new mongoose.Schema({
             name: { type: String, required: true },
             size: { type: String, required: true },
             quantity: { type: Number, required: true },
+            productPrice: { type: Number, required: true },
+            image: { type: String, required: true },
+
         }
     ],
 }, { timestamps: true, minimize:false })

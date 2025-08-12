@@ -10,16 +10,16 @@ const Sidebar = () => {
 
         </div>
         <nav className='px-1 font-montserrat'>
-                <Link to={'/add-product'} className='flex gap-3 py-3 items-center md:px-2 hover:bg-gray-300 rounded'>
+                <Link to={'/admin/add-product'} className='flex gap-3 py-3 items-center md:px-2 hover:bg-gray-300 rounded'>
                     <PackagePlus size={35}/> 
                     <p className='hidden md:block'>Add Product</p>
                 </Link>
-                <Link to={'/products'} className='flex gap-3 py-3 items-center md:px-2 hover:bg-gray-300 rounded'>
+                <Link to={'/admin/products'} className='flex gap-3 py-3 items-center md:px-2 hover:bg-gray-300 rounded'>
                     <Boxes size={35} /> 
                     <p className='hidden md:block'>Product List</p>
 
                 </Link>
-                <Link to={'/orders'} className='flex gap-3 py-3 items-center md:px-2 hover:bg-gray-300 rounded'>
+                <Link to={'/admin/orders'} className='flex gap-3 py-3 items-center md:px-2 hover:bg-gray-300 rounded'>
                     <ShoppingBasket size={35} />
                     <p className='hidden md:block'>Orders</p>
 

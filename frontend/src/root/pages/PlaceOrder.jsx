@@ -10,13 +10,18 @@ import Button from '../../components/Button'
 import { useCartStore } from '../../store/cart-store'
 import { useMutation } from '@tanstack/react-query'
 import { createOrderOptions } from '../../react-queries/userQueries'
+import { useNavigate } from 'react-router'
 const PlaceOrder = () => {
 
-    const {cart, totalPrice} = useCartStore();
-    // console.log(cart);
-    // console.log(totalPrice);
+    const {cart, totalPrice, clearCart} = useCartStore();
+    const navigate = useNavigate();
 
-    const createOrderMutation = useMutation(createOrderOptions)
+    const createOrderMutation = useMutation({
+        ...createOrderOptions, 
+        onSuccess: ()=> {
+            clearCart();
+            navigate('/orders')
+        }})
     
   return (
     <section className='pt-25 '>
@@ -39,7 +44,9 @@ const PlaceOrder = () => {
                     productId: item._id,
                     name: item.name,
                     size: item.size,
-                    quantity: item.quantity
+                    quantity: item.quantity,
+                    productPrice: item.quantity * item.price,
+                    image: item.image
 
                 }))
                 

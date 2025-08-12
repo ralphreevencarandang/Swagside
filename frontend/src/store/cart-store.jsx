@@ -73,5 +73,7 @@ export const useCartStore = create((set)=>({
 
       return { cart: updatedCart, subTotal, totalPrice };
     }),
+
+    clearCart: ()=> set(({cart: []}))
 }));
 

@@ -6,5 +6,6 @@ export const requireUser = (req, res, next) => {
             message: 'Access denied. User access only' 
         });
     }
+    
     next();
 };

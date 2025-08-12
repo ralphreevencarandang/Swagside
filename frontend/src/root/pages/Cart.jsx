@@ -6,6 +6,7 @@ import { Link } from 'react-router'
 import CartTotal from '../../components/CartTotal'
 const Cart = () => {
     const {cart } = useCartStore()
+      console.log('Cart: ', cart);
       
   return (
     <section className='pt-25'>

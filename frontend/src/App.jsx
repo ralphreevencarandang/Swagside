@@ -17,6 +17,7 @@ import AdminLogin from './admin/Pages/AdminLogin'
 import Product from './root/pages/Product'
 import Cart from './root/pages/Cart'
 import PlaceOrder from './root/pages/PlaceOrder'
+import Order from './root/pages/Order'
 function App() {
 
 
@@ -42,6 +43,7 @@ function App() {
                 <Route path='/product/:id' element={<Product/>}/>
                 <Route path='/Cart' element={<Cart/>}/>
                 <Route path='/place-order' element={<PlaceOrder/>}/>
+                <Route path='/orders' element={<Order/>}/>
             </Route>
 
             {/* Admin Routes */}
@@ -50,10 +52,10 @@ function App() {
             <Route path='/adminLogin' element={<AdminLogin/>}/>
 
             <Route element={<AdminLayout/>}>
-              <Route path='/add-product' element={<CreateProduct/>}/>
-              <Route path='/products' element={<ProductList/>}/>
-              <Route path='/orders' element={<Orders/>}/>
-              <Route path='/editProduct/:id' element={<EditProduct/>}/>
+              <Route path='/admin/add-product' element={<CreateProduct/>}/>
+              <Route path='/admin//products' element={<ProductList/>}/>
+              <Route path='/admin//orders' element={<Orders/>}/>
+              <Route path='/admin//editProduct/:id' element={<EditProduct/>}/>
             </Route>
           </Routes>
         </BrowserRouter>

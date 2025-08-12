@@ -87,3 +87,13 @@ User
 
 
 
+Mga protected routes
+place-order page
+- hindi makakapunta sa order page hanggang walang laman ang cart
+cart - proceed to checkout
+
+singup
+login
+
+Admin
+all pages

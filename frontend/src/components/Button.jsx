@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Button = ({label, onClick, type}) => {
+const Button = ({label,...props}) => {
   return (
-    <button type={type} className='cursor-pointer text-xl px-4 py-2  bg-black text-white hover:bg-stone-800 font-oswald' onClick={onClick} >
+    <button {...props} className='cursor-pointer text-xl px-4 py-2  bg-black text-white hover:bg-stone-800 font-oswald'  >
         {label}
     </button>
   )

@@ -1,5 +1,6 @@
 import { Product } from "../models/ProductModel.js";
 import { User } from "../models/UserModel.js";
+import { Order } from "../models/OrderModel.js";
 export const getAllProducts = async(req, res)=>{
     try {
     
@@ -39,3 +40,34 @@ export const getProduct = async(req,res)=>{
     }
 }
 
+
+export const createOrder = async (req, res)=>{
+    try {
+        const {firstname, lastname, email, address, phonenumber, totalPrice, paymentMethod, orderStatus, items} = req.body;
+        if(!firstname || !lastname || !email || !address || !phonenumber || !totalPrice || !paymentMethod || !items){
+            res.status(422).json({success:false, message: 'Please input all required fields'});
+            return
+        }
+
+        const order = new Order({
+            firstname, 
+            lastname, 
+            email, 
+            address, 
+            phonenumber, 
+            totalPrice, 
+            paymentMethod, 
+            orderStatus, 
+            items
+        });
+
+        await order.save();
+
+        res.status(201).json({success:true, message: 'Order successful'})
+
+
+    } catch (error) {
+        console.log('Error in get products controller: ',error);
+        res.status(500).json({success: false, message: "Internal server error"})
+    }
+}

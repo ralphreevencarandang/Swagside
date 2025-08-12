@@ -30,10 +30,13 @@ export const checkoutSchema = yup.object().shape({
     firstname: yup.string().min(2, 'First must be at least 2 characters').required('Name field is required'),
     lastname: yup.string().min(2, 'First must be at least 2 characters').required('Lastname field is required'),
     email: yup.string().email('Invalid email').required('Email field si required'),
-    street: yup.string().required('Street field is required'),
-    city: yup.string().required('City field is required'),
-    state: yup.string().required('State field is required'),
-    zipcode: yup.number().required('Zipcode field is required'),
-    country: yup.string().required('Country field is required'),
+    address: yup.object().shape({
+        street: yup.string().required('Street field is required'),
+        city: yup.string().required('City field is required'),
+        state: yup.string().required('State field is required'),
+        zipcode: yup.number().typeError('Zipcode must be a number').required('Zipcode field is required'),
+        country: yup.string().required('Country field is required'),
+     }),
+
     phonenumber: yup.string().matches(phonenumberRules, {message: 'Please input valid phonenumber'}).required('Phonenumber field is required'),
 })

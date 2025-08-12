@@ -6,7 +6,7 @@ const CartTotal = () => {
         const {totalPrice, shippingFee, subTotal } = useCartStore()
     
   return (
-    <div className='my-15'>
+    <div className='my-10'>
             <h1 className='font-montserrat text-2xl'>CART TOTALS</h1>
             <div className='flex flex-col gap-2 mb-10'>
                 <div className='flex justify-between font-montserrat text-sm'>

@@ -1,5 +1,5 @@
 import express from 'express'
-import { adminLogin, adminLogout, createProduct, deleteProduct, updateProduct, getAllProduct, getProduct } from '../controllers/adminController.js'
+import { adminLogin, adminLogout, createProduct, deleteProduct, updateProduct, getAllProduct, getProduct, getAllOrders } from '../controllers/adminController.js'
 import { authenticate } from '../middlewares/authenticate.js';
 import { requireAdmin } from '../middlewares/requireAdmin.js';
 import { upload } from '../config/multer.js';
@@ -12,5 +12,7 @@ router.delete('/admin/deleteProduct/:id',authenticate,requireAdmin ,deleteProduc
 router.put('/admin/updateProduct/:id' ,upload.single('image'),authenticate,requireAdmin ,updateProduct);
 router.get('/admin/products',authenticate,requireAdmin ,getAllProduct);
 router.get('/admin/product/:id',authenticate,requireAdmin ,getProduct);
+router.get('/admin/orders', authenticate, requireAdmin ,getAllOrders)
+
 
 export default router

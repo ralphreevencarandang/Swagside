@@ -94,6 +94,6 @@ cart - proceed to checkout
 
 singup
 login
-
+    
 Admin
 all pages

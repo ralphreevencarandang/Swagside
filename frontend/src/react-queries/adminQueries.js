@@ -150,6 +150,19 @@ const updateProduct = async ({id, values})=>{
     }
 }
 
+const getOrders = async ()=>{
+    try {
+        const res = await axios.get(`/admin/orders`)
+        console.log(res.data);
+        return res.data
+        
+    } catch (error) {
+         console.log('Error in Create order function: ', error);
+        toast.error(error.response.data.message)
+        throw error; 
+    }
+}
+
 // MUTATIONS
 export const signinQuery = mutationOptions({
         mutationFn: signIn,
@@ -189,6 +202,8 @@ export const getAllProductOptions = queryOptions({
     queryFn: getAllProducts,
 })
 
+
+
 export const deleteProductOptions = mutationOptions({
     mutationFn: deleteProduct,
     onError: (error)=>{
@@ -209,6 +224,13 @@ export const updateProductOptions = mutationOptions({
         console.log('Error in Update Product mutation: ', error);
     },
 })
+
+export const getAllOrderOptions = queryOptions({
+    queryKey:['orders'],
+    queryFn: getOrders
+
+})
+
 
 
 

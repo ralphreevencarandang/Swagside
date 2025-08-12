@@ -9,7 +9,7 @@ const AdminLogin = () => {
     const loginMutation = useMutation({
         ...signinQuery,
         onSuccess: ()=>{
-            navigate('/products')
+            navigate('/admin/products')
         }
     })
   return (

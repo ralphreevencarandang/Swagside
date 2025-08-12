@@ -2,6 +2,7 @@ import { User } from "../models/UserModel.js";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken'
 import { Product } from "../models/ProductModel.js";
+import { Order } from "../models/OrderModel.js";
 
 export const adminLogin = async(req, res)=>{
      try {
@@ -208,6 +209,25 @@ export const checkAuth = (req, res)=>{
      });
     } catch (error) {
          console.log('Error check auth function: ', error);
+        res.status(500).json({success:false, message:'Internal server error'})
+    }
+}
+
+
+export const  getAllOrders = async (req, res)=>{
+    try {
+
+        const orders = await Order.find();
+
+        if(!orders){
+            res.status(404).json({success: false , message:'Order not found!'});
+            return
+        }
+
+        res.status(200).json({success:true, orders})
+        
+    } catch (error) {
+        console.log('Error get all orders controllers: ', error);
         res.status(500).json({success:false, message:'Internal server error'})
     }
 }

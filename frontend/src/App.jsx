@@ -18,6 +18,7 @@ import Product from './root/pages/Product'
 import Cart from './root/pages/Cart'
 import PlaceOrder from './root/pages/PlaceOrder'
 import Order from './root/pages/Order'
+import NotFoundPage from './root/NotFoundPage'
 function App() {
 
 
@@ -53,11 +54,15 @@ function App() {
 
             <Route element={<AdminLayout/>}>
               <Route path='/admin/add-product' element={<CreateProduct/>}/>
-              <Route path='/admin//products' element={<ProductList/>}/>
-              <Route path='/admin//orders' element={<Orders/>}/>
-              <Route path='/admin//editProduct/:id' element={<EditProduct/>}/>
+              <Route path='/admin/products' element={<ProductList/>}/>
+              <Route path='/admin/orders' element={<Orders/>}/>
+              <Route path='/admin/editProduct/:id' element={<EditProduct/>}/>
             </Route>
+
+            <Route path='*' element={<NotFoundPage/>} />
+
           </Routes>
+
         </BrowserRouter>
     </main>
   )

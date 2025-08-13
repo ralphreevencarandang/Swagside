@@ -51,7 +51,7 @@ if(sortBy === 'low-to-high'){
 
   
   return (
-    <section className='py-25 flex flex-col lg:gap-10  lg:flex-row'>
+    <section className='max-container padding-x py-25 flex flex-col lg:gap-10  lg:flex-row'>
       {isPending && <p>Loading...</p>}
       {error && <p>{error}</p>}
 

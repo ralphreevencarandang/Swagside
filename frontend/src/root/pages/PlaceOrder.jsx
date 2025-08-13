@@ -24,7 +24,7 @@ const PlaceOrder = () => {
         }})
     
   return (
-    <section className='pt-25 '>
+    <section className='pt-25 max-container padding-x '>
 
             <Formik initialValues={{
                 firstname: '', 

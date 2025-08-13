@@ -8,7 +8,7 @@ const Order = () => {
   console.log(data);
   
   return (
-    <section className='pt-25'>
+    <section className='pt-25 max-container padding-x'>
                 <h1 className='font-montserrat text-4xl mb-4'>Your Orders</h1>
                    {isPending && <p>Loading...</p>}
                   {error && <p>{error}</p>}

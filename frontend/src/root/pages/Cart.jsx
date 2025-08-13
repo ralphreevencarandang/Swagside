@@ -9,13 +9,13 @@ const Cart = () => {
       console.log('Cart: ', cart);
       
   return (
-    <section className='pt-25'>
+    <section className='pt-25 max-container padding-x'>
      
         <h1 className='font-montserrat text-4xl mb-4'>Your Cart</h1>
 
         {cart.length > 0 ?   
         ( 
-            <div>
+            <div className='mb-15'>
                 { cart.map((product, index)=>
                 <div key={index}>
                     <CartTable product={product}/>

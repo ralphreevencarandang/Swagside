@@ -4,7 +4,7 @@ import { whyChooseUs } from '../../constants'
 import Subscription from '../../sections/Subscription'
 const About = () => {
   return (
-    <section className='pt-25 '>
+    <section className='max-container padding-x pt-25 '>
         <h1 className='font-oswald text-5xl mb-4 text-center py-5'><span className='text-slate-600'>About</span> us</h1>
 
 

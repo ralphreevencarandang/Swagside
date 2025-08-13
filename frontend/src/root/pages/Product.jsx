@@ -36,7 +36,7 @@ const Product = () => {
   }
 
   return (
-    <section className='pt-25'>
+    <section className='pt-25 max-container padding-x'>
       {result1.isPending && <p>Loading....</p>}
       {result1.error && <p>{error}</p>}
       {result1.data && 

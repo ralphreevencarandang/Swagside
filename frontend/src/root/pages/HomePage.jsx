@@ -12,12 +12,18 @@ const HomePage = () => {
   const data = useQuery(getAllProductsOptions)
   return (
 
+
+
     <section className=" ">
-      <Hero/>
-      <LatestCollection result={data}/>
-      <BestSellers result={data}/>
-      <Policy/>
-      <Subscription/>
+        <Hero/>
+        <div className="max-container padding-x">
+
+        <LatestCollection result={data}/>
+        <BestSellers result={data}/>
+        <Policy/>
+        <Subscription/>
+   
+        </div>
      
     
     </section>

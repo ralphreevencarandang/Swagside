@@ -4,7 +4,7 @@ import Subscription from '../../sections/Subscription'
 const Contact = () => {
   return (
     <section className='pt-25'>
-        <h1 className='font-oswald text-4xl mb-4 text-center py-5'><span className='text-blue-500'>CONTACT</span> US</h1>
+        <h1 className='font-oswald text-4xl mb-4 text-center py-5'><span className='text-slate-600'>CONTACT</span> US</h1>
         
         <div className='flex flex-col justify-center sm:items-center sm:flex-row  gap-10'>
  

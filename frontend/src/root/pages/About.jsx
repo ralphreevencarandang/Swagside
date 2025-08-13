@@ -5,7 +5,7 @@ import Subscription from '../../sections/Subscription'
 const About = () => {
   return (
     <section className='pt-25 '>
-        <h1 className='font-oswald text-5xl mb-4 text-center py-5'><span className='text-blue-500'>About</span> us</h1>
+        <h1 className='font-oswald text-5xl mb-4 text-center py-5'><span className='text-slate-600'>About</span> us</h1>
 
 
         <div className='flex flex-col lg:flex-row gap-10' >

@@ -8,7 +8,7 @@ const LatestCollection = ({result}) => {
   return (
     <section className='mb-10'> 
       <div className='text-center mb-10'>
-          <h1 className='font-oswald text-5xl mb-4'><span className='text-blue-500'>Latest</span> Collection</h1>
+          <h1 className='font-oswald text-5xl mb-4'><span className='text-slate-600'>Latest</span> Collection</h1>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, aut?</p>
       </div>
 

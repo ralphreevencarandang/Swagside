@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5001;
 app.use(cookieParser())
 
 app.use(cors({
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5173', 'https://swagside.vercel.app'],
     credentials: true,
     methods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS'],
     allowedHeaders: ['Content-Type'],

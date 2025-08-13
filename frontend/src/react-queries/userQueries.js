@@ -2,13 +2,29 @@
 import { toast } from "react-toastify";
 import axios from '../lib/axios'
 import { mutationOptions, queryOptions } from "@tanstack/react-query";
+import { useAuthStore } from "../store/authStore";
 
 const login = async (values)=>{
     try {
         const res = await axios.post('/user/login', values)
         res.data.success && toast.success('Login successful!')
+        res.data.success && useAuthStore.getState().setIsUserLoggedIn(true);
     } catch (error) {
         console.log('Error in login function: ', error);
+        toast.error(error.response.data.message)
+        throw error; 
+    }
+}
+
+const logout = async ()=>{
+    try {
+        const res = await axios.post('/user/logout')
+
+        res.data.success && toast.success('Logout successful!')
+        res.data.success && useAuthStore.getState().setIsUserLoggedIn(false);
+
+    } catch (error) {
+        console.log('Error in Logout function: ', error);
         toast.error(error.response.data.message)
         throw error; 
     }
@@ -100,3 +116,10 @@ export const getOrderOptions = queryOptions({
 
 })
 
+export const logoutOptions = mutationOptions({
+    mutationFn: logout,
+    onError: (error)=>{
+        console.log('Error in login mutations: ',error);
+        
+    }
+})

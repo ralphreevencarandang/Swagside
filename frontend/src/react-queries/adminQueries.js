@@ -2,11 +2,14 @@
 import { toast } from "react-toastify";
 import axios from '../lib/axios'
 import { mutationOptions, queryOptions } from "@tanstack/react-query";
+import { useAuthStore } from "../store/authStore";
 
 const signIn = async (values) => {
     try {
         const res = await axios.post('/admin/login', values)
         res.data.success && toast.success(res.data.message)
+        res.data.success && useAuthStore.getState().setIsAdminLoggedIn(true);
+
     } catch (error) {
         console.log('Error in Sign in function: ',error);
         toast.error(error.response.data.message)
@@ -29,7 +32,7 @@ const logout = async ()=>{
     try {
         const res = await axios.post('/admin/logout')
         res.data.success && toast.success(res.data.message)
-        console.log('Logout submiited');
+        res.data.success && useAuthStore.getState().setIsAdminLoggedIn(false);
     } catch (error) {
         console.log('Error in logout function', error);
         toast.error(error.response.data.message)

@@ -88,9 +88,17 @@ User
 
 
 Mga protected routes
+
 place-order page
 - hindi makakapunta sa order page hanggang walang laman ang cart
-cart - proceed to checkout
+
+
+If not login user can't access
+- place order X
+- orders / sign in form X
+- hindi makakapag add to cart  X
+- Hindi lalabas yung logout button
+
 
 singup
 login

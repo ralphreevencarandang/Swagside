@@ -9,16 +9,31 @@ import { getAllProductsOptions } from '../../react-queries/userQueries'
 import { useCartStore } from '../../store/cart-store'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import { useAuthStore } from '../../store/authStore'
+import { useNavigate } from 'react-router'
 const Product = () => {
   
   const {id} = useParams();
   const [result1, result2] = useQueries({queries:[getProductOptions(id), getAllProductsOptions]})
- 
+   const navigate = useNavigate();
   const [size, setSize] = useState('')
   const [quantity, setQuantity] = useState(1)
   const { cart, addToCart} = useCartStore();
 
-  console.log('Cart: ', cart);
+  const {isUserLoggedIn} = useAuthStore();
+
+  const handleAddToCart = ()=>{
+    if(!isUserLoggedIn){
+        toast.error('Please log in to add items to your cart');
+        navigate('/sign-in')
+    }else{
+      if(size){
+        addToCart({...result1.data.product, size: size, quantity: quantity}) 
+      }else{
+        toast.error('Please select size')
+      }
+    }
+  }
 
   return (
     <section className='pt-25'>
@@ -53,13 +68,12 @@ const Product = () => {
                       <button className={` border border-slate-400 ${size === 'XL' ? 'bg-gray-400' : 'bg-gray-200'} px-4 py-2`} onClick={()=>setSize('XL')}>XL</button>
                   </div>
 
-                  <Button label={'ADD TO CART'} onClick={()=> size ?  addToCart({...result1.data.product, size: size, quantity: quantity}) : toast.error('Please select size') } />
+                  <Button label={'ADD TO CART'} onClick={()=> handleAddToCart() } />
                    
                    
                   <hr className='mt-10 border-gray-300 mb-4' />
 
                   <div className='text-sm text-slate-500'>
-
                       <p >100% Original product.</p>
                       <p >Cash on delivery is available on this product.</p>
                       <p >Easy return and exchange policy within 7 days.</p>

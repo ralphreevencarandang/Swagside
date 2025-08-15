@@ -59,7 +59,7 @@ const ProductList = () => {
 
                         </td>
                         <td className=" px-6 py-4 flex items-center justify-center  gap-2">
-                            <Link to={`/editProduct/${item._id}`} className='bg-yellow-500 px-2 py-1 rounded text-white'>Edit</Link>
+                            <Link to={`/admin/editProduct/${item._id}`} className='bg-yellow-500 px-2 py-1 rounded text-white'>Edit</Link>
                             <button onClick={()=> deleteMutation.mutate(item._id)} className='bg-red-500 px-2 py-1 rounded text-white'>Delete</button>
                         </td>
                     </tr>

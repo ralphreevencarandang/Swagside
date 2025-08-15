@@ -19,7 +19,7 @@ const EditProduct = () => {
     ...updateProductOptions,
     onSuccess: ()=>{
       refetch,
-      navigate('/products')
+      navigate('/admin/products')
     }
   })
 
